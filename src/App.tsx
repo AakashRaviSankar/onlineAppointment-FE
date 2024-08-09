@@ -5,7 +5,7 @@ import { fetchZohoData } from "./services/service";
 interface Session {
   meetingKey?: string;
   encryptPwd?: string;
-  meetingEmbedUrl: string;
+  meetingEmbedUrl?: string;
 }
 
 interface ZohoData {
@@ -30,7 +30,7 @@ function App() {
       {data?.session.map((elem, index) => (
         <iframe
           key={index}
-          src={elem?.meetingEmbedUrl}
+          src={`https://meeting.zoho.in/meeting/login/join.jsp?key=${elem?.meetingKey}&name=Aakash_R&viewer=html5&join=true&t=${elem?.encryptPwd}`}
           width="100%"
           height="100%"
         />
