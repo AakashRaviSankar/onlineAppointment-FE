@@ -3,9 +3,8 @@ import { fetchZohoData } from "./services/service";
 
 // Define the type for a session object
 interface Session {
-  meetingKey?: string;
-  encryptPwd?: string;
-  meetingEmbedUrl?: string;
+  meetingKey: string;
+  encryptPwd: string;
 }
 
 interface ZohoData {
@@ -30,7 +29,7 @@ function App() {
       {data?.session.map((elem, index) => (
         <iframe
           key={index}
-          src={`https://meeting.zoho.in/meeting/login/join.jsp?key=${elem?.meetingKey}&name=Aakash_R&viewer=html5&join=true&t=${elem?.encryptPwd}`}
+          src={`https://meeting.zoho.in/meeting/login/embedmeeting.jsp?meetingKey=${elem.meetingKey}&newWindow=false&t=${elem.encryptPwd}&name="Aakash"`}
           width="100%"
           height="100%"
         />
