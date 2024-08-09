@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BACKEND_URL = "http://192.168.0.106:5000/api/zoho";
+const BACKEND_URL = "https://onlineappointment.onrender.com/api/zoho";
 
 export const fetchZohoData = async () => {
   try {
