@@ -29,7 +29,7 @@ function App() {
       {data?.session.map((elem, index) => (
         <iframe
           key={index}
-          src={`https://meeting.zoho.in/meeting/login/embedmeeting.jsp?meetingKey=${elem.meetingKey}&newWindow=false&t=${elem.encryptPwd}&email="Aakash@gmail.com"`}
+          src={`https://meeting.zoho.in/meeting/login/embedmeeting.jsp?meetingKey=${elem.meetingKey}&t=${elem.encryptPwd}`}
           width="100%"
           height="100%"
         />
