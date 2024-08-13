@@ -1,0 +1,52 @@
+import { useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
+
+export default function EmbeddedMeeting() {
+  const { state } = useLocation();
+
+  const iframeRef = useRef(null);
+
+  useEffect(() => {
+    // Function to fetch the embedded meeting HTML
+    const fetchMeeting = async () => {
+      try {
+        const response = await fetch(
+          "https://onlineappointment.onrender.com/embedded",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              meetingKey: state?.meetingKey,
+              encryptPwd: state?.encryptPwd,
+            }),
+          }
+        );
+
+        const data = await response.text(); // The response is HTML
+
+        // Inject the HTML content into the iframe
+        const iframe = iframeRef.current;
+        const doc = iframe.contentDocument || iframe.contentWindow.document;
+        doc.open();
+        doc.write(data);
+        doc.close();
+      } catch (error) {
+        console.error("Error fetching the meeting:", error);
+      }
+    };
+
+    fetchMeeting();
+  }, [state?.meetingKey, state?.encryptPwd]);
+
+  return (
+    <iframe
+      ref={iframeRef}
+      title="Zoho Meeting"
+      width="100%"
+      height="600px"
+      frameBorder="0"
+    ></iframe>
+  );
+}

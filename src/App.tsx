@@ -1,41 +1,12 @@
-import { useEffect, useState } from "react";
-import { fetchZohoData } from "./services/service";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Meeting from "./pages/meeting/Meeting";
+import "./app.css";
+import EmbeddedMeeting from "./pages/meeting/EmbeddedMeeting";
 
-// Define the type for a session object
-interface Session {
-  meetingKey: string;
-  encryptPwd: string;
+export default function App() {
+  const router = createBrowserRouter([
+    { path: "/", element: <Meeting /> },
+    { path: "/embeddedmeeting", element: <EmbeddedMeeting /> },
+  ]);
+  return <RouterProvider router={router} />;
 }
-
-interface ZohoData {
-  session: Session[];
-}
-
-function App() {
-  const [data, setData] = useState<ZohoData | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const newData = await fetchZohoData();
-      setData(newData);
-      console.log(newData);
-    };
-
-    fetchData();
-  }, []);
-
-  return (
-    <>
-      {data?.session.map((elem, index) => (
-        <iframe
-          key={index}
-          src={`https://meeting.zoho.in/meeting/login/embedmeeting.jsp?meetingKey=${elem.meetingKey}&t=${elem.encryptPwd}`}
-          width="100%"
-          height="100%"
-        />
-      ))}
-    </>
-  );
-}
-
-export default App;

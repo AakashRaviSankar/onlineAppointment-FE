@@ -1,0 +1,19 @@
+.bgContainer {
+  background-image: url("src/assets/images/bgLogin.png");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.card {
+  border-radius: 10px;
+  background-image: linear-gradient(240deg, #bde6eb, #3a62a7);
+  position: absolute;
+  left: 5%;
+  top: 30%;
+  width: 40%;
+  text-align: justify;
+  height: 50%;
+  padding: 2%;
+  color: white;
+}
