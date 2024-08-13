@@ -7,7 +7,6 @@ export default function EmbeddedMeeting() {
   const iframeRef = useRef(null);
 
   useEffect(() => {
-    // Function to fetch the embedded meeting HTML
     const fetchMeeting = async () => {
       try {
         const response = await fetch(
@@ -24,11 +23,10 @@ export default function EmbeddedMeeting() {
           }
         );
 
-        const data = await response.text(); // The response is HTML
+        const data = await response.text();
 
-        // Inject the HTML content into the iframe
         const iframe = iframeRef.current;
-        const doc = iframe.contentDocument || iframe.contentWindow.document;
+        const doc = iframe?.contentDocument || iframe?.contentWindow?.document;
         doc.open();
         doc.write(data);
         doc.close();

@@ -26,7 +26,6 @@ interface ZohoData {
 function Meeting() {
   const [data, setData] = useState<ZohoData | null>(null);
   const [login, setLogin] = useState<string>("");
-  const [filteredData, setFilteredData] = useState<Session | null>(null);
 
   const navigate = useNavigate();
   const [alert, setAlert] = useState<{
@@ -68,8 +67,6 @@ function Meeting() {
       });
       return;
     }
-
-    setFilteredData(newData);
 
     const currentTime = Date.now();
     const startTimeMillisec = newData.startTimeMillisec;
