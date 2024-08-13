@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 export default function EmbeddedMeeting() {
   const { state } = useLocation();
 
-  const iframeRef = useRef(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
     const fetchMeeting = async () => {
@@ -26,10 +26,19 @@ export default function EmbeddedMeeting() {
         const data = await response.text();
 
         const iframe = iframeRef.current;
-        const doc = iframe?.contentDocument || iframe?.contentWindow?.document;
-        doc.open();
-        doc.write(data);
-        doc.close();
+
+        if (iframe) {
+          const doc = iframe.contentDocument || iframe.contentWindow?.document;
+          if (doc) {
+            doc.open();
+            doc.write(data);
+            doc.close();
+          } else {
+            console.error("Could not access the iframe's document.");
+          }
+        } else {
+          console.error("Iframe reference is null.");
+        }
       } catch (error) {
         console.error("Error fetching the meeting:", error);
       }
